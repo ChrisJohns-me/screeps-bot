@@ -18,7 +18,11 @@ module.exports = {
     project: "tsconfig.json",
     sourceType: "module"
   },
-  plugins: ["@typescript-eslint", "import"],
+  plugins: [
+    "@typescript-eslint",
+    "import",
+    "no-null"
+  ],
   settings: {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -60,6 +64,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-namespace": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-parameter-properties": "off",
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
@@ -122,10 +127,11 @@ module.exports = {
     "prefer-const": "error",
     "quote-props": "off",
     radix: "error",
-    "sort-imports": "warn",
+    "sort-imports": "off",
     "space-before-function-paren": "off",
     "spaced-comment": "error",
     "use-isnan": "error",
-    "valid-typeof": "off"
+    "valid-typeof": "off",
+    "no-null/no-null": 2
   }
 };

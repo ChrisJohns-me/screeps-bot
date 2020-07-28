@@ -1,20 +1,12 @@
-// example declaration file - remove these and add your own custom typings
+/* eslint-disable no-null/no-null */
 
-// memory extension samples
-interface CreepMemory {
-  role: string;
-  room: string;
-  working: boolean;
-}
+/**
+ * Generally needed for functions' return value, or local variables.
+ */
+type Optional<T> = T | undefined;
 
-interface Memory {
-  uuid: number;
-  log: any;
-}
-
-// `global` extension samples
-declare namespace NodeJS {
-  interface Global {
-    log: any;
-  }
-}
+/**
+ * `null` should generally be avoided.
+ * This might be helpful however, when interfacing with other libraries.
+ */
+type Nullable<T> = T | undefined | null;
