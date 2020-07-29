@@ -51,10 +51,13 @@ export class CreepSpawnCarrierController extends CreepController {
     return undefined;
   }
 
+  // TODO: Abstract this into CreepController.
   private deliverEnergy(): void {
     const memSpawn = Memory.rooms[this.creep.room.name].structures?.spawns?.[0];
     const spawn = Game.getObjectById<StructureSpawn>(memSpawn?.id ?? "");
     if (!spawn) {
+      console.log(`${this.creep.name} (${this.creepType}) can't deliver; No Spawn in memory`);
+      this.creep.say(`Hmmm...`);
       return;
     }
 
@@ -65,8 +68,11 @@ export class CreepSpawnCarrierController extends CreepController {
       creepMove = this.creep.moveTo(spawn);
 
       if (creepMove !== OK) {
-        console.error(`${this.creep.name} could not move, err #${creepMove}`);
+        console.log(`${this.creep.name} could not move, err #${creepMove}`);
       }
+    } else if (creepTransfer === ERR_FULL) {
+      // TODO: Might be more logic to do here.
+      console.log(`${this.creep.name} (${this.creepType}) can't deliver; Structure full`);
     }
   }
 }

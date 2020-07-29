@@ -19,9 +19,9 @@ export class RunScreepsController {
         new Creeps.creepRolesControllers[myCreep.memory.role](myCreep);
         creepTimer.end();
 
-        creepTimer.watchdog(5, (t: number) => `"${myCreep.name}" (${myCreep.memory.role}): ${t}ms`);
+        creepTimer.watchdog(20, (t: number) => `"${myCreep.name}" (${myCreep.memory.role}): ${t}ms`);
       } catch (ex) {
-        console.exception(`Caught error with "${myCreep.name}" (${myCreep.memory.role})`, ex);
+        console.log(`Caught error with "${myCreep.name}" (${myCreep.memory.role})`, ex);
       }
     }
   }

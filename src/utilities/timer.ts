@@ -60,7 +60,7 @@ export class Timer {
     }
 
     if (bark) {
-      console.warn(bark);
+      console.log(bark);
     }
   }
 }

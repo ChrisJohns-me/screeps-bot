@@ -19,7 +19,7 @@ export abstract class CreepController {
     if (this.creep.memory?.energySource) {
       // Energy source cache expired
       if (this.creep.memory.energySource?.objectIdCacheExpire < Game.time) {
-        energySource = this.getEnergySource();
+        energySource = this.findEnergySource();
         energySourceCache = Game.time + config.cacheTimeExpire.creepEnergySource;
       } else {
         energySource = Game.getObjectById(this.creep.memory.energySource.objectId);
@@ -90,7 +90,7 @@ export abstract class CreepController {
     }
   }
 
-  private getEnergySource(): Source {
+  private findEnergySource(): Source {
     let energySources: Source[];
 
     energySources = Room.energySources(this.creep.room.name);

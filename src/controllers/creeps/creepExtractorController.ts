@@ -43,7 +43,7 @@ export class CreepExtractorController extends CreepController {
     // If there aren't any immediately nearby, just drop the energy.
     // Allows other creeps to pick up the resource.
     if (myStructures.length <= 0) {
-      this.creep.say("Energy dump");
+      this.creep.say("EnergyDump");
       creep.drop(RESOURCE_ENERGY);
     }
   }

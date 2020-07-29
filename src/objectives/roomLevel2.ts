@@ -8,6 +8,25 @@ import { RunScreepsController } from "../controllers/runScreepsController";
 import { SpawnsController } from "../controllers/spawns/spawnsController";
 
 export class RoomLevel2 extends RoomObjective {
+  private spawnId!: string;
+  private controllerId!: string;
+
+  public constructor(roomName: string) {
+    super(roomName);
+
+    if (Memory.rooms[this.roomName].structures?.spawns?.[0].id) {
+      this.spawnId = Memory.rooms[this.roomName].structures!.spawns![0].id!;
+    }
+
+    if (Memory.rooms[this.roomName].structures?.controller?.id) {
+      this.controllerId = Memory.rooms[this.roomName].structures!.controller!.id!;
+    }
+
+    if (!this.spawnId || !this.controllerId) {
+      throw new Error(`${this.roomName} at ${this.constructor.name} has no memory of spawn or controller`);
+    }
+  }
+
   public startRoom(): void {
     InitializeRoomController.initialize(this.roomName);
   }
@@ -27,10 +46,18 @@ export class RoomLevel2 extends RoomObjective {
   }
 
   public startConstruction(): void {
-    const spawnId = Memory.rooms[this.roomName].structures?.spawns?.[0].id;
-    const controllerId = Memory.rooms[this.roomName].structures?.controller?.id;
     const energySources: Optional<{ [objectId: string]: TerrainEnergySourcesMemory }> =
       Memory.rooms[this.roomName].terrainData?.energySources;
+
+    this.constructPathsToEnergySources(energySources);
+    this.constructContainers();
+  }
+
+  public runCreeps(): void {
+    RunScreepsController.initialize(this.roomName);
+  }
+
+  private constructPathsToEnergySources(energySources?: { [objectId: string]: TerrainEnergySourcesMemory }): void {
     const energySourcesIdArr: string[] = [];
 
     // Remap the energy object ids to an array
@@ -38,15 +65,13 @@ export class RoomLevel2 extends RoomObjective {
       energySourcesIdArr.push(sourceId);
     }
 
-    if (spawnId && controllerId) {
-      ConstructionSitesController.constructPaths(this.roomName, [
-        { fromId: spawnId, toIdArr: energySourcesIdArr, priority: 10 },
-        { fromId: controllerId, toIdArr: energySourcesIdArr, priority: 20 }
-      ]);
-    }
+    ConstructionSitesController.constructPaths(this.roomName, [
+      { fromId: this.spawnId, toIdArr: energySourcesIdArr, priority: 10 },
+      { fromId: this.controllerId, toIdArr: energySourcesIdArr, priority: 20 }
+    ]);
   }
 
-  public runCreeps(): void {
-    RunScreepsController.initialize(this.roomName);
+  private constructContainers() {
+    // TODO...
   }
 }
