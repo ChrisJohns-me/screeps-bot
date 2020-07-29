@@ -1,3 +1,4 @@
+import { CreepRole } from "enums/creepRole.enum";
 import { CreepController } from "./creepController";
 
 export class CreepTowerCarrierController extends CreepController {

@@ -1,4 +1,5 @@
 import { CreepController } from "controllers/creeps/creepController";
+import { CreepRole } from "enums/creepRole.enum";
 import { config } from "../../config";
 import { CreepBuilderController } from "../../controllers/creeps/creepBuilderController";
 import { CreepExtractorController } from "../../controllers/creeps/creepExtractorController";

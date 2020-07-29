@@ -1,4 +1,4 @@
-interface StructurePathMemory {
+export interface StructurePathMemory {
   fromId: string;
   toId: string;
   serialized: string;

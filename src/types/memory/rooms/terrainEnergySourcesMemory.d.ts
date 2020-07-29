@@ -1,4 +1,6 @@
-interface TerrainEnergySourcesMemory {
+import { CreepRole } from "enums/creepRole.enum";
+
+export interface TerrainEnergySourcesMemory {
   x: number;
   y: number;
   creepsAssigned: {

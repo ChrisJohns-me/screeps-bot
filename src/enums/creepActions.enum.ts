@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-enum CreepActions {
+export enum CreepActions {
   BUILD = "build",
   FETCH = "fetch",
   REPAIR = "repair",

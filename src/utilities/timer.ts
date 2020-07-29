@@ -1,4 +1,4 @@
-import { performance } from "perf_hooks";
+declare const performance: Performance;
 
 export class Timer {
   private performanceAPI = false;

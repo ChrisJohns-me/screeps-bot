@@ -1,3 +1,5 @@
+import { StructurePathMemory } from "types/memory/rooms/structurePathMemory";
+import { PathGoal } from "types/pathGoal";
 import { config } from "../../config";
 
 export class ConstructionSitesController {
@@ -62,10 +64,7 @@ export class ConstructionSitesController {
 
     // Try to find pathGoal (structurePaths) in memory
     Memory.rooms[roomName].structurePaths?.forEach((memPath, memIndex) => {
-      if (
-        (memPath.fromId === fromId && memPath.toId === toId) ||
-        (memPath.fromId === toId && memPath.toId === fromId)
-      ) {
+      if ((memPath.fromId === fromId && memPath.toId === toId) || (memPath.fromId === toId && memPath.toId === fromId)) {
         structurePath = memPath;
         structurePathIndex = memIndex;
         return;
@@ -81,10 +80,7 @@ export class ConstructionSitesController {
         serializedPath = Room.serializePath(pathArr);
 
         // Verify whole path is built; if it's not, update the memory
-        if (
-          !this.pathIsRoads(roomName, serializedPath) &&
-          Memory.rooms[roomName].structurePaths?.[structurePathIndex]
-        ) {
+        if (!this.pathIsRoads(roomName, serializedPath) && Memory.rooms[roomName].structurePaths?.[structurePathIndex]) {
           Memory.rooms[roomName].structurePaths![structurePathIndex].built = false;
         }
       }
@@ -99,8 +95,7 @@ export class ConstructionSitesController {
         Memory.rooms[roomName].structurePaths?.[structurePathIndex]
       ) {
         Memory.rooms[roomName].structurePaths![structurePathIndex].built = true;
-        Memory.rooms[roomName].structurePaths![structurePathIndex].cacheExpire =
-          Game.time + config.cacheTimeExpire.verifyPaths;
+        Memory.rooms[roomName].structurePaths![structurePathIndex].cacheExpire = Game.time + config.cacheTimeExpire.verifyPaths;
       }
       return;
     }

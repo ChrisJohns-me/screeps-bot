@@ -1,2 +1,2 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-interface CreepCarrierSpawn extends Creep {}
+export interface CreepCarrierSpawn extends Creep {}

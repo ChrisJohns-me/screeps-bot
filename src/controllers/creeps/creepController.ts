@@ -1,3 +1,4 @@
+import { CreepRole } from "enums/creepRole.enum";
 import { Room } from "../../classes/rooms/room";
 import { config } from "../../config";
 
@@ -24,8 +25,6 @@ export abstract class CreepController {
         energySource = Game.getObjectById(this.creep.memory.energySource.objectId);
         energySourceCache = this.creep.memory.energySource.objectIdCacheExpire;
       }
-      this.creep.memory.energySource.objectId = energySource?.id ?? "";
-      this.creep.memory.energySource.objectIdCacheExpire = energySourceCache;
 
       // Extracted resource cache expired
       if (
@@ -38,18 +37,19 @@ export abstract class CreepController {
         extractedResource = Game.getObjectById(this.creep.memory.energySource?.extractedResourceId);
         extractedResourceCache = this.creep.memory.energySource.extractedResourceIdCacheExpire;
       }
-      this.creep.memory.energySource.extractedResourceId = extractedResource?.id ?? "";
-      this.creep.memory.energySource.extractedResourceIdCacheExpire = extractedResourceCache;
     }
+
+    this.creep.memory.energySource = {
+      objectId: energySource?.id ?? "",
+      objectIdCacheExpire: energySourceCache,
+      extractedResourceId: extractedResource?.id ?? "",
+      extractedResourceIdCacheExpire: extractedResourceCache
+    };
 
     // Store energy sources in Terrain
     if (energySource?.id && this.creepType) {
-      if (
-        Memory.rooms[this.creep.memory.room].terrainData?.energySources[energySource.id]?.creepsAssigned[this.creepType]
-      ) {
-        Memory.rooms[this.creep.memory.room].terrainData!.energySources[energySource.id].creepsAssigned[
-          this.creepType
-        ]++;
+      if (Memory.rooms[this.creep.memory.room].terrainData?.energySources[energySource.id]?.creepsAssigned[this.creepType]) {
+        Memory.rooms[this.creep.memory.room].terrainData!.energySources[energySource.id].creepsAssigned[this.creepType]++;
       } else {
         Memory.rooms[this.creep.memory.room].terrainData!.energySources[energySource.id].creepsAssigned = {
           creepWorker: 0,
@@ -59,9 +59,7 @@ export abstract class CreepController {
           creepCarrierSpawn: 0,
           creepCarrierTower: 0
         };
-        Memory.rooms[this.creep.memory.room].terrainData!.energySources[energySource.id].creepsAssigned[
-          this.creepType
-        ] = 1;
+        Memory.rooms[this.creep.memory.room].terrainData!.energySources[energySource.id].creepsAssigned[this.creepType] = 1;
       }
     }
   }
@@ -97,10 +95,8 @@ export abstract class CreepController {
 
     energySources = Room.energySources(this.creep.room.name);
     energySources = energySources.sort((a: Source, b: Source) => {
-      const cntAssignedToA: number = _.filter(Game.creeps, (c: Creep) => c?.memory?.energySource?.objectId === a.id)
-        .length;
-      const cntAssignedToB: number = _.filter(Game.creeps, (c: Creep) => c?.memory?.energySource?.objectId === b.id)
-        .length;
+      const cntAssignedToA: number = _.filter(Game.creeps, (c: Creep) => c?.memory?.energySource?.objectId === a.id).length;
+      const cntAssignedToB: number = _.filter(Game.creeps, (c: Creep) => c?.memory?.energySource?.objectId === b.id).length;
       const creepDistanceToA: number = this.creep.pos.getRangeTo(a.pos);
       const creepDistanceToB: number = this.creep.pos.getRangeTo(b.pos);
       return cntAssignedToA !== cntAssignedToB ? cntAssignedToA - cntAssignedToB : creepDistanceToA - creepDistanceToB;

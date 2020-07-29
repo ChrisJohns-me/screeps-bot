@@ -1,4 +1,4 @@
-interface Creep {
+export interface Creep {
   role: string;
   subRole: string;
   partsRequired: string[];

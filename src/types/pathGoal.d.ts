@@ -1,4 +1,4 @@
-interface PathGoal {
+export interface PathGoal {
   fromId: string;
   toIdArr: string[];
   priority: number;

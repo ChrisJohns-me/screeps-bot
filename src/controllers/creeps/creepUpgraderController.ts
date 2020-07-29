@@ -1,3 +1,5 @@
+import { CreepActions } from "enums/creepActions.enum";
+import { CreepRole } from "enums/creepRole.enum";
 import { CreepController } from "../../controllers/creeps/creepController";
 
 export class CreepUpgraderController extends CreepController {
@@ -17,6 +19,8 @@ export class CreepUpgraderController extends CreepController {
       } else if (newAction === CreepActions.DELIVER) {
         this.creep.say("Delivering");
       }
+
+      this.creep.memory.action = newAction;
     }
 
     // Perform the creep's action
@@ -49,9 +53,7 @@ export class CreepUpgraderController extends CreepController {
   }
 
   private deliverEnergy(): void {
-    const controllerTarget = Game.getObjectById<StructureController>(
-      Memory.rooms[this.creep.room.name]?.structures?.controller?.id ?? ""
-    );
+    const controllerTarget = Game.getObjectById<StructureController>(Memory.rooms[this.creep.room.name]?.structures?.controller?.id ?? "");
 
     if (controllerTarget && this.creep.upgradeController(controllerTarget) === ERR_NOT_IN_RANGE) {
       this.creep.moveTo(controllerTarget);

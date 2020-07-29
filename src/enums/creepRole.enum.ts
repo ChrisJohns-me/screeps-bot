@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-enum CreepRole {
+export enum CreepRole {
   CREEP_WORKER = "creepWorker",
   CREEP_EXTRACTOR = "creepExtractor",
   CREEP_BUILDER = "creepBuilder",

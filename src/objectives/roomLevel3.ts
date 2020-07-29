@@ -1,20 +1,21 @@
 import { RoomObjective } from "classes/roomObjective";
 import { LandscapeController } from "controllers/rooms/landscapeController";
+import { CreepRole } from "enums/creepRole.enum";
 import { InitializeRoomController } from "../controllers/rooms/initializeRoomController";
 import { RunScreepsController } from "../controllers/runScreepsController";
 import { SpawnsController } from "../controllers/spawns/spawnsController";
 
 export class RoomLevel3 extends RoomObjective {
   public startRoom(): void {
-    InitializeRoomController.initialize(super.roomName);
+    InitializeRoomController.initialize(this.roomName);
   }
 
   public startLandscape(): void {
-    LandscapeController.initialize(super.roomName);
+    LandscapeController.initialize(this.roomName);
   }
 
   public startSpawns(): void {
-    SpawnsController.initialize(super.roomName, [
+    SpawnsController.initialize(this.roomName, [
       { type: CreepRole.CREEP_EXTRACTOR, min: 2, priority: 10 },
       { type: CreepRole.CREEP_BUILDER, min: 1, priority: 45 },
       { type: CreepRole.CREEP_UPGRADER, min: 4, priority: 30 },
@@ -24,6 +25,6 @@ export class RoomLevel3 extends RoomObjective {
   }
 
   public runCreeps(): void {
-    RunScreepsController.initialize(super.roomName);
+    RunScreepsController.initialize(this.roomName);
   }
 }

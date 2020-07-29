@@ -5,6 +5,6 @@ interface Math {
   clamp: (inputNumber: number, min: number, max: number) => number;
 }
 
-Math.clamp = function (inputNumber: number, min: number, max: number): number {
-  return Math.min(Math.max(inputNumber, min), max);
-};
+Object.assign(Math, {
+  clamp: (inputNumber: number, min: number, max: number): number => Math.min(Math.max(inputNumber, min), max)
+});

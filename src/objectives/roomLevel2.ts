@@ -1,5 +1,7 @@
 import { RoomObjective } from "classes/roomObjective";
 import { LandscapeController } from "controllers/rooms/landscapeController";
+import { CreepRole } from "enums/creepRole.enum";
+import { TerrainEnergySourcesMemory } from "types/memory/rooms/terrainEnergySourcesMemory";
 import { ConstructionSitesController } from "../controllers/rooms/constructionSitesController";
 import { InitializeRoomController } from "../controllers/rooms/initializeRoomController";
 import { RunScreepsController } from "../controllers/runScreepsController";
@@ -7,15 +9,15 @@ import { SpawnsController } from "../controllers/spawns/spawnsController";
 
 export class RoomLevel2 extends RoomObjective {
   public startRoom(): void {
-    InitializeRoomController.initialize(super.roomName);
+    InitializeRoomController.initialize(this.roomName);
   }
 
   public startLandscape(): void {
-    LandscapeController.initialize(super.roomName);
+    LandscapeController.initialize(this.roomName);
   }
 
   public startSpawns(): void {
-    SpawnsController.initialize(super.roomName, [
+    SpawnsController.initialize(this.roomName, [
       { type: CreepRole.CREEP_EXTRACTOR, min: 2, priority: 10 },
       { type: CreepRole.CREEP_BUILDER, min: 2, priority: 45 },
       { type: CreepRole.CREEP_UPGRADER, min: 3, priority: 30 },
@@ -25,10 +27,10 @@ export class RoomLevel2 extends RoomObjective {
   }
 
   public startConstruction(): void {
-    const spawnId = Memory.rooms[super.roomName].structures?.spawns?.[0].id;
-    const controllerId = Memory.rooms[super.roomName].structures?.controller?.id;
+    const spawnId = Memory.rooms[this.roomName].structures?.spawns?.[0].id;
+    const controllerId = Memory.rooms[this.roomName].structures?.controller?.id;
     const energySources: Optional<{ [objectId: string]: TerrainEnergySourcesMemory }> =
-      Memory.rooms[super.roomName].terrainData?.energySources;
+      Memory.rooms[this.roomName].terrainData?.energySources;
     const energySourcesIdArr: string[] = [];
 
     // Remap the energy object ids to an array
@@ -37,7 +39,7 @@ export class RoomLevel2 extends RoomObjective {
     }
 
     if (spawnId && controllerId) {
-      ConstructionSitesController.constructPaths(super.roomName, [
+      ConstructionSitesController.constructPaths(this.roomName, [
         { fromId: spawnId, toIdArr: energySourcesIdArr, priority: 10 },
         { fromId: controllerId, toIdArr: energySourcesIdArr, priority: 20 }
       ]);
@@ -45,6 +47,6 @@ export class RoomLevel2 extends RoomObjective {
   }
 
   public runCreeps(): void {
-    RunScreepsController.initialize(super.roomName);
+    RunScreepsController.initialize(this.roomName);
   }
 }

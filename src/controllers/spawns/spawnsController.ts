@@ -1,3 +1,5 @@
+import { CreepRole } from "enums/creepRole.enum";
+import { CreepGoal } from "types/creepGoal";
 import { Creeps } from "../../classes/creeps/creeps";
 
 export class SpawnsController {

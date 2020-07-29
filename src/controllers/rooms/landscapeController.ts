@@ -1,3 +1,6 @@
+import { Coordinates } from "types/coordinates";
+import { TerrainData } from "types/terrainData";
+
 export class LandscapeController {
   /**
    * Sets up pre-defined structure locations around the room.
@@ -43,7 +46,7 @@ export class LandscapeController {
 
   private static exitPoints(roomName: string, terrainData: TerrainData): Coordinates[] {
     // TODO: Calc exit points...
-    console.log(`exitPoints() unimplemented args:`, roomName, terrainData);
+    // console.log(`exitPoints() unimplemented args:`, roomName, terrainData);
     const pos: Coordinates[] = [
       { x: 2, y: 3 },
       { x: 2, y: 3 }
@@ -57,7 +60,7 @@ export class LandscapeController {
    */
   private static extensionLocations(roomName: string, terrainData: TerrainData): Coordinates[] {
     // TODO: Calc extension locations...
-    console.log(`extensionLocations() unimplemented args:`, terrainData);
+    // console.log(`extensionLocations() unimplemented args:`, terrainData);
 
     const xStartOffset = -5;
     const yStartOffset = -5;
@@ -84,7 +87,7 @@ export class LandscapeController {
 
   private static linkLocations(roomName: string, terrainData: TerrainData): Coordinates[] {
     // TODO: Calc link locations...
-    console.log(`linkLocations() unimplemented args:`, roomName, terrainData);
+    // console.log(`linkLocations() unimplemented args:`, roomName, terrainData);
 
     const pos: Coordinates[] = [
       { x: 2, y: 3 },
@@ -96,7 +99,7 @@ export class LandscapeController {
 
   private static towerLocations(roomName: string, terrainData: TerrainData): Coordinates[] {
     // TODO: Calc tower locations...
-    console.log(`towerLocations() unimplemented args:`, roomName, terrainData);
+    // console.log(`towerLocations() unimplemented args:`, roomName, terrainData);
 
     const pos: Coordinates[] = [
       { x: 2, y: 3 },

@@ -1,3 +1,5 @@
+import { CreepActions } from "enums/creepActions.enum";
+import { CreepRole } from "enums/creepRole.enum";
 import { CreepController } from "../../controllers/creeps/creepController";
 
 export class CreepBuilderController extends CreepController {
@@ -17,6 +19,7 @@ export class CreepBuilderController extends CreepController {
       } else if (newAction === CreepActions.REPAIR) {
         this.creep.say("Repairing");
       }
+
       this.creep.memory.action = newAction;
     }
 

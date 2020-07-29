@@ -1,2 +1,2 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-interface CreepExtractor extends Creep {}
+export interface CreepExtractor extends Creep {}

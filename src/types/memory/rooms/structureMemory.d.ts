@@ -1,4 +1,4 @@
-interface StructureMemory {
+export interface StructureMemory {
   id?: string;
   name?: string;
   x: number;

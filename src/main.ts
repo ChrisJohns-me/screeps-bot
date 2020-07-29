@@ -1,6 +1,8 @@
 import { GameController } from "controllers/gameController";
 import { RoomsController } from "controllers/roomsController";
 import { ErrorMapper } from "utilities/errorMapper";
+import "./prototypes/consolePrototype";
+import "./prototypes/mathPrototype";
 
 GameController.initialize();
 

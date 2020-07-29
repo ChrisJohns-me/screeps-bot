@@ -1,3 +1,4 @@
+import { CreepRole } from "enums/creepRole.enum";
 import { CreepController } from "../../controllers/creeps/creepController";
 
 export class CreepExtractorController extends CreepController {
@@ -31,9 +32,7 @@ export class CreepExtractorController extends CreepController {
   private distributeEnergy(creep: Creep): void {
     // Find close by structures that this creep can drop off energy to
     const myStructures = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-      filter: s =>
-        (s.structureType === STRUCTURE_CONTAINER || s.structureType === STRUCTURE_STORAGE) &&
-        s.store[RESOURCE_ENERGY] > 0
+      filter: s => (s.structureType === STRUCTURE_CONTAINER || s.structureType === STRUCTURE_STORAGE) && s.store[RESOURCE_ENERGY] > 0
     }) as (StructureContainer | StructureStorage)[];
 
     // Do the transfer

@@ -1,3 +1,7 @@
+import { TerrainEnergySourcesMemory } from "types/memory/rooms/terrainEnergySourcesMemory";
+import { TerrainData } from "types/terrainData";
+import { TerrainTotals } from "types/terrainTotals";
+
 export class TerrainMapping {
   public static mapTerrain(roomName: string): TerrainData {
     const area: LookAtResultWithPos[] = TerrainMapping.terrainArea(roomName);

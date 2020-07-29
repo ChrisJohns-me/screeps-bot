@@ -1,3 +1,4 @@
+import { StructureMemory } from "types/memory/rooms/structureMemory";
 import { TerrainMapping } from "../../classes/rooms/terrainMapping";
 
 export class InitializeRoomController {
@@ -22,9 +23,7 @@ export class InitializeRoomController {
     const memController: Optional<StructureMemory> = !!controller
       ? { id: controller.id, x: controller.pos.x, y: controller.pos.y }
       : undefined;
-    const memSpawn: Optional<StructureMemory> = !!spawn
-      ? { id: spawn.id, name: spawn.name, x: spawn.pos.x, y: spawn.pos.y }
-      : undefined;
+    const memSpawn: Optional<StructureMemory> = !!spawn ? { id: spawn.id, name: spawn.name, x: spawn.pos.x, y: spawn.pos.y } : undefined;
 
     Memory.rooms[roomName] = {
       structures: {

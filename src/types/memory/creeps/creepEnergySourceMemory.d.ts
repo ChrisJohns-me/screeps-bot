@@ -1,4 +1,4 @@
-interface CreepEnergySourceMemory {
+export interface CreepEnergySourceMemory {
   objectId: string;
   objectIdCacheExpire: number;
   extractedResourceId: string;
