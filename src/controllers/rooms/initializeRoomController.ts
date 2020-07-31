@@ -3,7 +3,7 @@ import { TerrainMapping } from "../../classes/rooms/terrainMapping";
 
 export class InitializeRoomController {
   public static initialize(roomName: string): void {
-    if (Memory.rooms[roomName]?.isInitialized === true) {
+    if (Memory.rooms?.[roomName]?.isInitialized === true) {
       // Room already initialized
       return;
     } else if (!Memory.rooms || Object.keys(Memory.rooms).length <= 0) {
