@@ -50,7 +50,6 @@ export class RoomLevel2 extends RoomObjective {
       Memory.rooms[this.roomName].terrainData?.energySources;
 
     this.constructPathsToEnergySources(energySources);
-    this.constructContainers();
   }
 
   public runCreeps(): void {
@@ -69,9 +68,5 @@ export class RoomLevel2 extends RoomObjective {
       { fromId: this.spawnId, toIdArr: energySourcesIdArr, priority: 10 },
       { fromId: this.controllerId, toIdArr: energySourcesIdArr, priority: 20 }
     ]);
-  }
-
-  private constructContainers() {
-    // TODO...
   }
 }
