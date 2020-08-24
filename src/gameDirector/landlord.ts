@@ -1,10 +1,13 @@
 import { EstateAgent } from "interfaces/estateAgent";
+import { GameDirector } from "./gameDirector";
 
 export class Landlord implements EstateAgent {
+  public ownedRoom: Game["rooms"];
   public ownedRooms: Room[];
 
-  public constructor(rooms: Game["rooms"]) {
-    this.ownedRooms = Object.values(rooms);
+  public constructor(private gameDirector: GameDirector, ownedRooms: Game["rooms"]) {
+    this.ownedRooms = Object.values(ownedRooms);
+    this.ownedRoom = ownedRooms;
   }
 
   public mapTerrain(room: Room): void {
@@ -15,11 +18,15 @@ export class Landlord implements EstateAgent {
     throw new Error("Method not implemented.");
   }
 
-  public prepareTaskList(room: Room): void {
+  public prepareTasks(room: Room): void {
     throw new Error("Method not implemented.");
   }
 
-  public prepareEnergySourcesList(room: Room): void {
+  public prepareEnergySources(room: Room): void {
+    throw new Error("Method not implemented.");
+  }
+
+  public energySourcesForCreep(creep: Creep): Source[] {
     throw new Error("Method not implemented.");
   }
 }

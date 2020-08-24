@@ -1,25 +1,25 @@
 import { EstateAgent } from "interfaces/estateAgent";
 import { Mind } from "interfaces/mind";
+import { TaskMaster } from "interfaces/taskMaster";
 import { UnitOperator } from "interfaces/unitOperator";
 
-interface SetupOptions {
-  mind: Mind;
-  estateAgent: EstateAgent;
-  unitOperator: UnitOperator;
-}
-
 export class GameDirector {
-  public mind: Mind;
-  public estateAgent: EstateAgent;
-  public unitOperator: UnitOperator;
+  public mind!: Mind;
+  public estateAgent!: EstateAgent;
+  public unitOperator!: UnitOperator;
+  public taskMaster!: TaskMaster;
 
   public get ownedRooms(): Room[] {
     return this.estateAgent.ownedRooms;
   }
 
-  public constructor(private game: Game, setupOpts: SetupOptions) {
-    this.mind = setupOpts.mind;
-    this.estateAgent = setupOpts.estateAgent;
-    this.unitOperator = setupOpts.unitOperator;
+  public get ownedCreeps(): Creep[] {
+    return this.unitOperator.ownedCreeps;
   }
+
+  public get ownedPowerCreeps(): PowerCreep[] {
+    return this.unitOperator.ownedPowerCreeps;
+  }
+
+  public constructor(private game: Game) {}
 }
