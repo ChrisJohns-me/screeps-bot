@@ -1,4 +1,4 @@
-import { IConfig } from "interfaces/config.interface";
+import { IConfig } from "interfaces/config";
 
 export const config: IConfig = {
   cacheTimeExpire: {
