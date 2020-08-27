@@ -1,19 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-type PriorityLevel = "HIGH" | "MEDIUM" | "LOW";
+enum Level {
+  LOW = 0.25,
+  MEDIUM = 0.5,
+  HIGH = Infinity
+}
 
-export const Priority = (priorityLevel: PriorityLevel): any => (
-  target: Record<string, unknown>,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) => {
-  const cpuUsed = Game.cpu.getUsed();
-  const cpuLimit = Game.cpu.tickLimit;
-  const cpuPerc = cpuUsed / cpuLimit;
+type InputLevel = "LOW" | "MEDIUM" | "HIGH";
 
-  if ((priorityLevel === "LOW" && cpuPerc >= 0.25) || (priorityLevel === "MEDIUM" && cpuPerc >= 0.5)) {
-    descriptor.value = () => undefined;
-    const parent: string = target?.constructor?.name;
-    console.log(`[CPU Limit] Terminated "${parent}.${propertyKey}" (${priorityLevel})`);
-  }
+export const Priority = function (inputLevel: InputLevel) {
+  return function (target: unknown, propertyKey: string, descriptor: PropertyDescriptor): void {
+    const originalFn = descriptor.value as (...args: any[]) => void;
+
+    descriptor.value = function (...args: any[]) {
+      const maxCpu = Level[inputLevel];
+      const cpuUsed = Game.cpu.getUsed();
+      const cpuLimit = Game.cpu.tickLimit;
+      const cpuPerc = (cpuUsed / cpuLimit) * 100;
+      const canRun = maxCpu > cpuPerc;
+
+      if (canRun) {
+        return originalFn.apply(this, args);
+      } else {
+        const parent: string = (target as any)?.constructor?.name;
+        console.log(`[CPU Limit::${inputLevel}] Terminated "${parent}.${propertyKey}"`);
+      }
+    };
+  };
 };

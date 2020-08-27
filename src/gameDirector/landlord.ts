@@ -1,3 +1,5 @@
+import { Frequency } from "decorators/frequency";
+import { Priority } from "decorators/priority";
 import { EstateAgent } from "interfaces/estateAgent";
 import { GameDirector } from "./gameDirector";
 
@@ -10,23 +12,25 @@ export class Landlord implements EstateAgent {
     this.ownedRoom = ownedRooms;
   }
 
-  public mapTerrain(room: Room): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("LOW")
+  @Frequency("PERMANENTLY")
+  public mapTerrain(room: Room): void {}
 
-  public auditStructures(room: Room): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("LOW")
+  @Frequency("OCCASIONALLY")
+  public auditStructures(room: Room): void {}
 
-  public prepareTasks(room: Room): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("HIGH")
+  @Frequency("PERIODICALLY")
+  public prepareTasks(room: Room): void {}
 
-  public prepareEnergySources(room: Room): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("HIGH")
+  @Frequency("FREQUENTLY")
+  public prepareEnergySources(room: Room): void {}
 
+  @Priority("LOW")
+  @Frequency("FREQUENTLY")
   public energySourcesForCreep(creep: Creep): Source[] {
-    throw new Error("Method not implemented.");
+    return [];
   }
 }

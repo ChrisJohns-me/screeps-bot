@@ -1,3 +1,5 @@
+import { Frequency } from "decorators/frequency";
+import { Priority } from "decorators/priority";
 import { Task } from "interfaces/task";
 import { UnitOperator } from "interfaces/unitOperator";
 import { GameDirector } from "./gameDirector";
@@ -11,15 +13,15 @@ export class Puppeteer implements UnitOperator {
     this.ownedPowerCreeps = Object.values(powerCreeps);
   }
 
-  public assignTasks(tasks: Task[]): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("HIGH")
+  @Frequency("CONSTANTLY")
+  public assignTasks(tasks: Task[]): void {}
 
-  public assignEnergySources(energySources: Source[]): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("LOW")
+  @Frequency("FREQUENTLY")
+  public assignEnergySources(energySources: Source[]): void {}
 
-  public controlCreep(creep: Creep): void {
-    throw new Error("Method not implemented.");
-  }
+  @Priority("HIGH")
+  @Frequency("CONSTANTLY")
+  public controlCreep(creep: Creep): void {}
 }
