@@ -4,6 +4,7 @@ import { Landlord } from "gameDirector/landlord";
 import { Puppeteer } from "gameDirector/puppeteer";
 import { Tasker } from "gameDirector/tasker";
 import { ErrorMapper } from "utilities/errorMapper";
+import "./prototypes/creepPrototype";
 import "./prototypes/mathPrototype";
 
 const theGameDirector = new GameDirector(Game);
