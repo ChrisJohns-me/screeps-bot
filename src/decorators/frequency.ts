@@ -30,8 +30,9 @@ export const Frequency = function (inputAmount: InputAmount) {
     descriptor.value = function (...args: any[]) {
       const amount = Amount[inputAmount];
       const canRun = Game.time % amount === 0;
+      const firstBoot = global.firstBoot;
 
-      if (canRun) {
+      if (canRun || firstBoot) {
         // const parent: string = (target as any)?.constructor?.name;
         // console.log(`[Frequency::${inputAmount}] Running "${parent}.${propertyKey}"`);
         return originalFn.apply(this, args);

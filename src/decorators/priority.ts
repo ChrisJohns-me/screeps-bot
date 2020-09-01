@@ -18,8 +18,9 @@ export const Priority = function (inputLevel: InputLevel) {
       const cpuLimit = Game.cpu.tickLimit;
       const cpuPerc = (cpuUsed / cpuLimit) * 100;
       const canRun = maxCpu > cpuPerc;
+      const firstBoot = global.firstBoot;
 
-      if (canRun) {
+      if (canRun || firstBoot) {
         return originalFn.apply(this, args);
       } else {
         const parent: string = (target as any)?.constructor?.name;

@@ -1,16 +1,20 @@
 import { Frequency } from "decorators/frequency";
 import { Priority } from "decorators/priority";
-import { Task } from "interfaces/task";
-import { UnitOperator } from "interfaces/unitOperator";
-import { GameDirector } from "./gameDirector";
+import { GameDirector } from "gameDirector";
+import { Task } from "tasks/task";
 
-export class Puppeteer implements UnitOperator {
+interface CreepManagerDependencies {
+  creeps: Game["creeps"];
+  powerCreeps: Game["powerCreeps"];
+}
+
+export class CreepManager {
   public ownedCreeps: Creep[];
   public ownedPowerCreeps: PowerCreep[];
 
-  public constructor(private gameDirector: GameDirector, creep: Game["creeps"], powerCreeps: Game["powerCreeps"]) {
-    this.ownedCreeps = Object.values(creep);
-    this.ownedPowerCreeps = Object.values(powerCreeps);
+  public constructor(private gameDirector: GameDirector, dependencies: CreepManagerDependencies) {
+    this.ownedCreeps = Object.values(dependencies.creeps);
+    this.ownedPowerCreeps = Object.values(dependencies.powerCreeps);
   }
 
   @Priority("HIGH")

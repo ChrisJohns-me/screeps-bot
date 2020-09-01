@@ -1,6 +1,6 @@
 declare const performance: Performance;
 
-export class Timer {
+export class StopWatch {
   private performanceAPI = false;
   private startTime: Optional<number>;
   private endTime: Optional<number>;

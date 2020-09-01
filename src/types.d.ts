@@ -1,5 +1,12 @@
 /* eslint-disable no-null/no-null */
 
+/** global variables */
+declare namespace NodeJS {
+  interface Global {
+    firstBoot: boolean;
+  }
+}
+
 /** Generally needed for functions' return value, or local variables. */
 type Optional<T> = T | undefined;
 
