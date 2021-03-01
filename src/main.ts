@@ -1,7 +1,8 @@
-import { Cartographer } from "cartographer";
 import { GameDirector } from "gameDirector";
 import { CreepManager } from "managers/creepManager";
 import { MapManager } from "managers/mapManager";
+import { Architect } from "managers/mapManager/architect";
+import { Cartographer } from "managers/mapManager/cartographer";
 import { MemoryManager } from "managers/memoryManager";
 import { TaskManager } from "managers/taskManager";
 import { ErrorMapper } from "utilities/errorMapper";
@@ -16,13 +17,14 @@ theGameDirector.memoryManager = new MemoryManager(theGameDirector, {
 });
 theGameDirector.mapManager = new MapManager(theGameDirector, {
   ownedRooms: Game.rooms,
-  cartographer: new Cartographer()
+  cartographer: new Cartographer(theGameDirector),
+  architect: new Architect(theGameDirector)
 });
 theGameDirector.creepManager = new CreepManager(theGameDirector, {
   creeps: Game.creeps,
   powerCreeps: Game.powerCreeps
 });
-theGameDirector.taskManager = new TaskManager(theGameDirector, {});
+theGameDirector.taskManager = new TaskManager(theGameDirector);
 
 // Run on Bootstrap
 theGameDirector.memoryManager.checkIntegrity();

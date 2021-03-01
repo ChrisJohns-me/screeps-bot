@@ -1,12 +1,22 @@
+import { Frequency } from "decorators/frequency";
+import { Priority } from "decorators/priority";
 import { GameDirector } from "gameDirector";
 import { Task } from "tasks/task";
-
-interface TaskManagerDependencies {}
+import { TempTask } from "tasks/tempTask";
 
 export class TaskManager {
-  public tasks: Task[] = [];
+  /** Tasks by room */
+  public roomTask: { [roomName: string]: Task[] } = {};
 
-  public constructor(private gameDirector: GameDirector, dependencies: TaskManagerDependencies) {}
+  private tasks: Task[] = [new TempTask()];
 
-  public prepareTasks(room: Room): void {}
+  public constructor(private gameDirector: GameDirector) {}
+
+  @Priority("HIGH")
+  @Frequency("PERIODICALLY")
+  public prepareTasks(room: Room): void {
+    this.tasks.forEach(task => task.evaluate(room));
+
+    this.tasks.sort((a, b) => b.priority - a.priority);
+  }
 }

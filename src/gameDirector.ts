@@ -9,15 +9,27 @@ export class GameDirector {
   public creepManager!: CreepManager;
   public taskManager!: TaskManager;
 
-  public get ownedRooms(): Room[] {
+  public get ownedRoom(): MapManager["ownedRoom"] {
+    return this.mapManager.ownedRoom;
+  }
+
+  public get ownedRooms(): MapManager["ownedRooms"] {
     return this.mapManager.ownedRooms;
   }
 
-  public get ownedCreeps(): Creep[] {
+  public get ownedCreep(): CreepManager["ownedCreep"] {
+    return this.creepManager.ownedCreep;
+  }
+
+  public get ownedCreeps(): CreepManager["ownedCreeps"] {
     return this.creepManager.ownedCreeps;
   }
 
-  public get ownedPowerCreeps(): PowerCreep[] {
+  public get ownedPowerCreep(): CreepManager["ownedPowerCreep"] {
+    return this.creepManager.ownedPowerCreep;
+  }
+
+  public get ownedPowerCreeps(): CreepManager["ownedPowerCreeps"] {
     return this.creepManager.ownedPowerCreeps;
   }
 
